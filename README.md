@@ -1,7 +1,7 @@
 # BadBoi Bot
 
 [**Invite the bot with this link.**](https://discordapp.com/oauth2/authorize?client_id=555135372661620776&scope=bot&permissions=117760)
-By using the bot you agree to [these terms.](https://github.com/llamasking/BadBoi-Public/TERMS.md)
+By using the bot you agree to [these terms.](TERMS.md)
 
 This is the public revision of BadBoi from my shitty Discord server.
 
