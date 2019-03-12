@@ -59,7 +59,6 @@ client.on("message", async message => {
           .addField(responseCount.groovy + ", !!groovy", "Lets dance!")
           .addField(responseCount.iwanttodie + ", !!iwanttodie", "Of course you do. Everyone does.")
           .addField(responseCount.kek + ", !!kek", "Funny shit.")
-          .addField(responseCount.keknsfw + ", !!keknsfw", "Some naughty, naughty funny shit.")
           .addField(responseCount.reee + ", !!REEE", "People being autistic and REEEing.")
           .addField(responseCount.savagefuckingworld + ", !!savagefuckingworld", "It's a savage fucking world out there.")
           .addField(responseCount.windowsupdate + ", !!windowsupdate", "We all fucking hate it. Some more than others.")
@@ -85,17 +84,6 @@ client.on("message", async message => {
     case "cdate": {
         let cdate = message.author.createdAt;
         message.channel.send("Your account was created on ``" + cdate + "``.")
-        break;
-    }
-
-     // Kek NSFW
-    case "keknsfw": {
-        if (message.channel.nsfw) {
-          message.channel.send(response);
-        } else {
-          message.channel.send (message.author + ", you know that it is a big no no to send nsfw content in a regular channel, don't you? \
-You naughty, naughty boy.")
-        }
         break;
     }
 
