@@ -16,6 +16,10 @@ client.on("ready", () => {
   client.user.setActivity(config.activity);
 });
 
+client.on("guildCreate", guild => {
+  console.log(`Time: ${new Date().toLocaleTimeString()} Joined new server: ${guild.name} with ${guild.memberCount} members.`)
+})
+
 client.on("message", async message => {
   // Cut out bots, non-prefix, and group chats/dms.
   if(message.author.bot) return;
@@ -72,7 +76,7 @@ client.on("message", async message => {
           .setTitle("Other Commands")
           .setDescription("All the other shit that I do that everyone else does better.")
           .setAuthor(client.user.username, client.user.avatarURL)
-          .addField("!!cdate", "When was your account created?")
+          .addField("!!cdate @user", "When was someone's account created?")
           .addField("!!ping", "How shitty is my DSL internet today? http://www.speedtest.net/result/7799955707")
           .addField("!!penis @user", "How long is that guy's dick? 100% accurate. Works on chicks. @user is required!")
           .setColor(0x7289DA);
@@ -82,8 +86,7 @@ client.on("message", async message => {
 
      // Account Creation Date
     case "cdate": {
-        let cdate = message.author.createdAt;
-        message.channel.send("Your account was created on ``" + cdate + "``.")
+        message.channel.send(`${message.mentions.users.first().username}'s account was created on \`${message.mentions.users.first().createdAt}\`.`)
         break;
     }
 
@@ -118,17 +121,14 @@ client.on("message", async message => {
 
     // Purge -- DISABLED
     case "purge": {
-      /*
-      message.channel.bulkDelete(99);
-      break;
-      */
+      //message.channel.bulkDelete(99);
+      //break;
     }
 
     // Send response if nothing custom is set.
     default: {
       message.channel.send(response)
         .catch(error => message.reply("it appears that command does not exist. Use !!help or !!commands for a list of commands."))
-        .then(response => response.delete(2500))
       break;
     }
   }
