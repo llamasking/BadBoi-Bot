@@ -133,7 +133,7 @@ client.on("message", async message => {
     // Send response if nothing custom is set.
     default: {
       message.channel.send(response)
-        .catch(error => message.reply("it appears that command does not exist. Use !!help or !!commands for a list of commands."))
+        .catch(error)
       break;
     }
   }
