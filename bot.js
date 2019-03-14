@@ -69,6 +69,7 @@ client.on("message", async message => {
           .addField(responseCount.youhaveautism + ", !!youhaveautism", "Yes, you do.")
           .addField("Note:", "You can use \"!![command] [Number]\" to see a specific webm. \
           Numbers above the number shown next to the command are ignored.")
+          .setImage("https://raw.githubusercontent.com/llamasking/badboi/master/assets/rainbow.gif")
           .setColor(0x7289DA);
         message.channel.send({embed});
 
@@ -79,6 +80,7 @@ client.on("message", async message => {
           .addField("!!cdate @user", "When was someone's account created?")
           .addField("!!ping", "How shitty is my DSL internet today? http://www.speedtest.net/result/7799955707")
           .addField("!!penis @user", "How long is that guy's dick? 100% accurate. Works on chicks. @user is required!")
+          .setImage("https://raw.githubusercontent.com/llamasking/badboi/master/assets/rainbow.gif")
           .setColor(0x7289DA);
         message.channel.send({embed});
         break;
