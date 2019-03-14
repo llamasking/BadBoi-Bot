@@ -1,5 +1,7 @@
 # BadBoi Bot
 
+[![Discord Bots](https://discordbots.org/api/widget/status/555135372661620776.svg)](https://discordbots.org/bot/555135372661620776)
+
 [**Invite the bot with this link.**](https://discordapp.com/oauth2/authorize?client_id=555135372661620776&scope=bot&permissions=117760)
 By using the bot you agree to [these terms.](TERMS.md)
 

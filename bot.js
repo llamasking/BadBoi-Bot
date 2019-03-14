@@ -133,7 +133,7 @@ client.on("message", async message => {
     // Send response if nothing custom is set.
     default: {
       message.channel.send(response)
-        .catch(error)
+        .catch(error => null)
       break;
     }
   }
