@@ -2,9 +2,8 @@
 
 By using this bot, you allow us to:
 
-1. See command usage and associated information. This includes but is not limited to which command you used, which arguments you gave it, and your username.
-2. See when these things happen. When we log things to be sent to the console we attach a timestamp.
-3. If and when BadBoi Bot responds or sends a message or gives back a reply, and in what server it has sent its response in.
+1. See command usage and associated information. This includes which command you used, which argument(s) you gave it, and your username.
+2. See when these things happen. Timestamps are attached to all logged information.
 
 **Just because we  can, does not mean that we do.** Anything logged is strictly used to further bot development. **Obtained information will not sold to anyone for any reason.**
 
