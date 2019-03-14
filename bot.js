@@ -102,7 +102,10 @@ client.on("message", async message => {
        * Send message.
       */ 
 
-      if (expr == undefined) message.reply("You need to @ someone.");
+      if (expr == undefined) {
+        message.reply("You need to @ someone.");
+        break;
+      }
       var length = expr.slice(12, -8);
       var shaft = "8"
       for(length > 0; length--;) var shaft = shaft + "=";
