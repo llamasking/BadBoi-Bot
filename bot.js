@@ -8,10 +8,10 @@ let responseCount = require("./responseCount.json");
 let responseText = require("./responseText.json");
 
 // Set revision.
-let rev = 'Exposed Boi'
+let rev = 'Better boi'
 
 client.on("ready", () => {
-  console.log(`Bot online! \nRevision: ${rev} \nTime: ${new Date().toLocaleTimeString()}`);
+  console.log(`\nBot online! \nRevision: ${rev} \nTime: ${new Date().toLocaleTimeString()}`);
   console.log(`Serving ${client.guilds.size} servers with ${client.users.size} users. \n`)
   client.user.setActivity(config.activity);
 });
@@ -132,8 +132,12 @@ client.on("message", async message => {
 
     // Send response if nothing custom is set.
     default: {
+      if (response === undefined) {
+        console.log(`Time: ${new Date().toLocaleTimeString()} -- Sender ${message.author.username} -- Command: ${cmd} -- Arguments: ${args}`)
+        return
+      }
       message.channel.send(response)
-        .catch(error => null)
+        .catch(error => console.error(`Time: ${new Date().toLocaleTimeString()} Error: "${error}"`));
       break;
     }
   }
