@@ -7,6 +7,9 @@ let config = require("./config.json");
 let responseCount = require("./responseCount.json");
 let responseText = require("./responseText.json");
 
+// Load command modules.
+let help = require("./modules/help.js")
+
 // Set revision.
 let rev = 'Better boi'
 
@@ -21,10 +24,18 @@ client.on("guildCreate", guild => {
 })
 
 client.on("message", async message => {
-  // Cut out bots, non-prefix, and group chats/dms.
+  // Cut out bots and group chats/dms.
   if(message.author.bot) return;
-  if(message.content.indexOf(config.prefix) !== 0) return;
   if(message.guild === null) return;
+
+  // @Bot help
+  if(message.isMentioned(client.user.id) && message.content.includes("help")) {
+    help(Discord, message.channel)
+    console.log(`Time: ${new Date().toLocaleTimeString()} -- Sender ${message.author.username} -- Command: ${cmd} -- Arguments: ${args[0]}`)
+  }
+  
+  // Cut out commands not starting with prefix.
+  if(message.content.indexOf(config.prefix) !== 0) return;
 
   let args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   let cmd = args.shift().toLowerCase();
@@ -49,41 +60,8 @@ client.on("message", async message => {
     // Help
     case "help":
     case "commands": {
-        var embed = new Discord.RichEmbed()
-          .setTitle("Webm Commands")
-          .setDescription("Get a video of something, be it something retarded that ANTIFA did, something cute, \
-          or just something to get your sides hurting. Wanna dance or just enjoy a nice cup of tea with calming music? I have it all.")
-          .setAuthor(client.user.username, client.user.avatarURL)
-          .addField(responseCount.antifa + ", !!antifa", "They do stupid shit.")
-          .addField(responseCount.birb + ", !!birb", "BIRRRRRRRRRB.")
-          .addField(responseCount.bongocat + ", !!bongocat", "This meme does not deserve to die. Ever.")
-          .addField(responseCount.comphy + ", !!comphy", "Grab a nice cup of tea, a blanket, and get comphy.")
-          .addField(responseCount.cool + ", !!cool", "This shit is fucking cool!")
-          .addField(responseCount.cute + ", !!cute", "Cute shit.")
-          .addField(responseCount.groovy + ", !!groovy", "Lets dance!")
-          .addField(responseCount.iwanttodie + ", !!iwanttodie", "Of course you do. Everyone does.")
-          .addField(responseCount.kek + ", !!kek", "Funny shit.")
-          .addField(responseCount.reee + ", !!REEE", "People being autistic and REEEing.")
-          .addField(responseCount.savagefuckingworld + ", !!savagefuckingworld", "It's a savage fucking world out there.")
-          .addField(responseCount.windowsupdate + ", !!windowsupdate", "We all fucking hate it. Some more than others.")
-          .addField(responseCount.youhaveautism + ", !!youhaveautism", "Yes, you do.")
-          .addField("Note:", "You can use \"!![command] [Number]\" to see a specific webm. \
-          Numbers above the number shown next to the command are ignored.")
-          .setImage("https://raw.githubusercontent.com/llamasking/badboi/master/assets/rainbow.gif")
-          .setColor(0x7289DA);
-        message.channel.send({embed});
-
-        var embed = new Discord.RichEmbed()
-          .setTitle("Other Commands")
-          .setDescription("All the other shit that I do that everyone else does better.")
-          .setAuthor(client.user.username, client.user.avatarURL)
-          .addField("!!cdate @user", "When was someone's account created?")
-          .addField("!!ping", "How shitty is my DSL internet today? http://www.speedtest.net/result/7799955707")
-          .addField("!!penis @user", "How long is that guy's dick? 100% accurate. Works on chicks. @user is required!")
-          .setImage("https://raw.githubusercontent.com/llamasking/badboi/master/assets/rainbow.gif")
-          .setColor(0x7289DA);
-        message.channel.send({embed});
-        break;
+      help(Discord, message.channel);
+      break;
     }
 
      // Account Creation Date
@@ -98,7 +76,7 @@ client.on("message", async message => {
 
       /* 
        * Warn to @ person if not already done.
-       * Slice <@530900836596056073> to one digit number.
+       * Slice ID <@530900836596056073> to one digit number.
        * Inititate shaft.
        * Add one = per length.
        * Send message.
@@ -117,11 +95,11 @@ client.on("message", async message => {
 
     // Ping
     case "ping": {
-        // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
-        // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
-        const m = await message.channel.send("Testing ping!");
-        m.edit(`Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
-        break;
+      // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
+      // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
+      const m = await message.channel.send("Testing ping!");
+      m.edit(`Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+      break;
     }
 
     // Purge -- DISABLED
@@ -143,7 +121,7 @@ client.on("message", async message => {
   }
 
   // Logging <READ THE TERMS ON THE GITHUB REPO>
-  console.log(`Time: ${new Date().toLocaleTimeString()} -- Sender ${message.author.username} -- Command: ${cmd} -- Arguments: ${args}`)
+  console.log(`Time: ${new Date().toLocaleTimeString()} -- Sender ${message.author.username} -- Command: ${cmd} -- Arguments: ${args[0]}`)
 });
 
 client.login(config.token);
