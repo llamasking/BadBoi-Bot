@@ -14,7 +14,7 @@ let help = require("./modules/help.js")
 let rev = 'Better boi'
 
 client.on("ready", () => {
-  console.log(`\nBot online! \nRevision: ${rev} \nTime: ${new Date().toLocaleTimeString()}`);
+  console.log(`\nBot online! \nRevision: ${rev} \nTime: ${new Date()}`);
   console.log(`Serving ${client.guilds.size} servers with ${client.users.size} users. \n`)
   client.user.setActivity(config.activity);
 });
