@@ -1,6 +1,7 @@
 // Load and prep Discord and client.
 let Discord = require("discord.js");
 let client = new Discord.Client();
+let fs = require('fs');
 
 // Load configs. 
 let config = require("./config.json");
@@ -124,4 +125,8 @@ client.on("message", async message => {
   console.log(`Time: ${new Date().toLocaleTimeString()} -- Sender ${message.author.username} -- Command: ${cmd} -- Arguments: ${args[0]}`)
 });
 
-client.login(config.token);
+// Read token file and login.
+fs.readFile(config.token_location, 'utf8', (err, data) => {
+  if(err) throw err;
+  client.login(data.split("\n",1).toString());
+})
