@@ -1,18 +1,17 @@
 // Load and prep Discord and client.
-let Discord = require("discord.js");
-let client = new Discord.Client();
-let fs = require('fs');
+const Discord = require("discord.js");
+const client = new Discord.Client();
 
 // Load configs. 
-let config = require("./config.json");
-let responseCount = require("./responseCount.json");
-let responseText = require("./responseText.json");
+const config = require("./config.json");
+const responseCount = require("./responseCount.json");
+const responseText = require("./responseText.json");
 
 // Load command modules.
-let help = require("./modules/help.js")
+const help = require("./modules/help.js")
 
 // Set revision.
-let rev = 'Better boi'
+const rev = 'Better boi'
 
 client.on("ready", () => {
   console.log(`\nBot online! \nRevision: ${rev} \nTime: ${new Date()}`);
@@ -38,12 +37,12 @@ client.on("message", async message => {
   // Cut out commands not starting with prefix.
   if(message.content.indexOf(config.prefix) !== 0) return;
 
-  let args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  let cmd = args.shift().toLowerCase();
-  let expr = args[0];
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const cmd = args.shift().toLowerCase();
+  const expr = args[0];
 
   // Set limit to responseCount[cmd]; -> limit
-  let limit = responseCount[cmd];
+  const limit = responseCount[cmd];
   
   // Only do if command is listed in responseCount.json.
   if (responseCount[cmd] !== undefined) {
@@ -125,8 +124,4 @@ client.on("message", async message => {
   console.log(`Time: ${new Date().toLocaleTimeString()} -- Sender ${message.author.username} -- Command: ${cmd} -- Arguments: ${args[0]}`)
 });
 
-// Read token file and login.
-fs.readFile(config.token_location, 'utf8', (err, data) => {
-  if(err) throw err;
-  client.login(data.split("\n",1).toString());
-})
+client.login(config.token);
