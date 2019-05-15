@@ -1,6 +1,8 @@
 // Load and prep Discord and client.
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const fs = require("fs");
+const crypto = require("crypto");
 
 // Load configs. 
 const config = require("./config.json");
@@ -8,14 +10,21 @@ const responseCount = require("./responseCount.json");
 const responseText = require("./responseText.json");
 
 // Load command modules.
-const help = require("./modules/help.js")
+const help = require("./modules/help.js");
 
-// Set revision.
-const rev = 'Better boi'
+// Set revision
+fs.readFile('bot.js', (err, data) => {
+  if (err) throw err
+  hash = crypto.createHash('md5').update(data, 'utf8').digest('hex')
+  console.log(`Hash: ${hash}}`)
+})
 
 client.on("ready", () => {
-  console.log(`\nBot online! \nRevision: ${rev} \nTime: ${new Date()}`);
-  console.log(`Serving ${client.guilds.size} servers with ${client.users.size} users. \n`)
+  console.log(`
+    Logged in as ${client.user.username}.
+    Revision: 
+    Time: ${new Date()}
+    Serving ${client.guilds.size} servers with ${client.users.size} users.`);
   client.user.setActivity(config.activity);
 });
 
@@ -66,8 +75,13 @@ client.on("message", async message => {
 
      // Account Creation Date
     case "cdate": {
-        message.channel.send(`${message.mentions.users.first().username}'s account was created on \`${message.mentions.users.first().createdAt}\`.`)
-        break;
+      message.channel.send(`${message.mentions.users.first().username}'s account was created on \`${message.mentions.users.first().createdAt}\`.`);
+      break;
+    }
+
+    case "hash": {
+      message.channel.send(`Hash: ${hash}`);
+      break;
     }
 
      // Penis
@@ -87,7 +101,7 @@ client.on("message", async message => {
         break;
       }
       var length = expr.slice(12, -8);
-      var shaft = "8"
+      var shaft = "8";
       for(length > 0; length--;) var shaft = shaft + "=";
       message.channel.send(shaft + "D \n``This is 100% accurate.``")
       break;
@@ -102,21 +116,15 @@ client.on("message", async message => {
       break;
     }
 
-    // Purge -- DISABLED
-    case "purge": {
-      //message.channel.bulkDelete(99);
-      //break;
-    }
-
     // Send response if nothing custom is set.
     default: {
       if (response === undefined) {
-        console.log(`Time: ${new Date().toLocaleTimeString()} -- Sender ${message.author.username} -- Command: ${cmd} -- Arguments: ${args}`)
-        return
+        return;
+      } else {
+        message.channel.send(response)
+          .catch(error => console.error(`Time: ${new Date().toLocaleTimeString()} Error: "${error}"`));
+        break;
       }
-      message.channel.send(response)
-        .catch(error => console.error(`Time: ${new Date().toLocaleTimeString()} Error: "${error}"`));
-      break;
     }
   }
 
