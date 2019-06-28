@@ -82,7 +82,7 @@ client.on("message", async message => {
   }
 
   // Logging <READ THE TERMS ON THE GITHUB REPO FOR MORE INFO>
-  log(`Sender ${message.author.username} -- Command: ${cmd} -- Arguments: ${args}`)
+  log(`Command: ${cmd} -- Arguments: ${args}`)
 });
 
 client.login(config.token);
